@@ -3,19 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inputttt</title>
+    <title>Форма ввода</title>
+    <script>
+        // define the callAPI function that takes a first name and last name as parameters
+        var callAPI = (fName,lName)=>{
+            // instantiate a headers object
+            var myHeaders = new Headers();
+            // add content type header to object
+            myHeaders.append("Content-Type", "application/json");
+            // using built in JSON utility package turn object to string and store in a variable
+            var raw = JSON.stringify({"firstName":fName,"lastName":lName});
+            // create a JSON object with parameters for API call and store in a variable
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+            // -- Discribe properties input and unit for method Request Interface in dom-global-fetch
+            fetch("https://130ieos8h0.execute-api.us-east-1.amazonaws.com/prod", requestOptions)
+            .then(response => response.text())
+            .then(result => alert(JSON.parse(result).body))
+            .catch(error => console.log('error', error));
+        }
+    </script>
 </head>
 <body>
-    
     <fieldset>
-        <legend>Информация о товаре</legend>
+  <!--      <legend>Информация о товаре</legend>
         <dl>
             <dt><label>Наименование<input type="text" required></label></dt><br>
             <dt><label>Описание<input type="text" required></label></dt><br>
             <dt><label>Стоимость<input type="number"> </label></dt><br>
         </dl>       
         <form action="index.html" target="_blank">
-        <button>Отправить данные в БД и перейти в index</button>
+-->
+        <button>Перейти в index</button>
     </fieldset>
+    <br>
+    <br>
+    <form>
+        <label>First Name :</label>
+        <input type="text" id="firstName"><br>
+        <br>
+        <label>Last Name :</label>
+        <input type="text" id="lastName">
+        <!-- set button onClick method to call function we defined passing input values as parameters -->
+        <button type="button" onclick="callAPI(document.getElementById('firstName').value,document.getElementById('lastName').value)">Call API</button>
+    </form>
 </body>
 </html>
