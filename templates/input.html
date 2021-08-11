@@ -21,7 +21,7 @@
                 redirect: 'follow'
             };
             // -- Discribe properties input and unit for method Request Interface in dom-global-fetch
-            fetch("https://130ieos8h0.execute-api.us-east-1.amazonaws.com/prod", requestOptions)
+            fetch("https://130ieos8h0.execute-api.us-east-1.amazonaws.com/prod/html-PUT-API-DynamoDB", requestOptions)
             .then(response => response.text())
             .then(result => alert(JSON.parse(result).body))
             .catch(error => console.log('error', error));
